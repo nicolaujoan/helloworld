@@ -2,4 +2,5 @@ result.xml
 __pycache__
 .pytest_cache
 flask.pid
+flask.log
 venv/
