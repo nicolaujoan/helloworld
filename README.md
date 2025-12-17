@@ -12,3 +12,9 @@ I don't see a Jenkinsfile yet. Here are the best approaches: Option 1: Call venv
 ./venv/bin/pytest
 Option 2: Activate venv in Jenkins pipeline
 source venv/bin/activate && pytest
+
+### Ejercicios (CP 1.1)
+
+#### JENKINS 1
+
+- Crear y ejecutar un pipeline simple, una sola etapa con un "echo"
