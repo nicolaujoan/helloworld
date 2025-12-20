@@ -26,8 +26,9 @@ pipeline {
                             steps {
                                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                                     sh '''
+                                        cd "${WORKSPACE}"
                                         export PYTHONPATH="${WORKSPACE}"
-                                        "${WORKSPACE}/venv/bin/pytest" --junitxml=result-unit.xml test/unit
+                                        ./venv/bin/pytest --junitxml=result-unit.xml test/unit
                                     '''
                                 }
                             }
@@ -38,24 +39,26 @@ pipeline {
                     steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                             sh '''
+                                cd "${WORKSPACE}"
+
                                 # Stop any existing services
-                                "${WORKSPACE}/stop_wiremock.sh" || true
-                                "${WORKSPACE}/stop_flask.sh" || true
+                                ./stop_wiremock.sh || true
+                                ./stop_flask.sh || true
 
                                 # Start services using scripts
-                                "${WORKSPACE}/start_flask.sh"
-                                "${WORKSPACE}/start_wiremock.sh"
+                                ./start_flask.sh
+                                ./start_wiremock.sh
 
                                 # Wait for services to be ready
                                 sleep 10
 
                                 # Run tests
                                 export PYTHONPATH="${WORKSPACE}"
-                                "${WORKSPACE}/venv/bin/pytest" --junitxml=result-rest.xml test/rest
+                                ./venv/bin/pytest --junitxml=result-rest.xml test/rest
 
                                 # Cleanup
-                                "${WORKSPACE}/stop_wiremock.sh"
-                                "${WORKSPACE}/stop_flask.sh"
+                                ./stop_wiremock.sh
+                                ./stop_flask.sh
                             '''
                         }
                     }

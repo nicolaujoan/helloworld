@@ -30,9 +30,10 @@ pipeline {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                             unstash name:'code'
                             sh '''
+                                cd "${WORKSPACE}"
                                 ls -la
                                 export PYTHONPATH="${WORKSPACE}"
-                                "${WORKSPACE}/venv/bin/pytest" --junitxml=result-unit.xml test/unit
+                                ./venv/bin/pytest --junitxml=result-unit.xml test/unit
                             '''
                             stash name:'unit-res', includes:'result-unit.xml'
                        }
@@ -46,12 +47,14 @@ pipeline {
                       catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                         unstash name:'code'
                         sh '''
+                            cd "${WORKSPACE}"
+
                             # Stop any existing services
-                            "${WORKSPACE}/stop_wiremock.sh" || true
-                            "${WORKSPACE}/stop_flask.sh" || true
+                            ./stop_wiremock.sh || true
+                            ./stop_flask.sh || true
 
                             # Start services using scripts
-                            "${WORKSPACE}/start_flask.sh"
+                            ./start_flask.sh
 
                             # Start WireMock with Docker
                             docker rm -f wiremock 2>/dev/null || true
@@ -66,11 +69,11 @@ pipeline {
 
                             # Run tests
                             export PYTHONPATH="${WORKSPACE}"
-                            "${WORKSPACE}/venv/bin/pytest" --junitxml=result-rest.xml test/rest
+                            ./venv/bin/pytest --junitxml=result-rest.xml test/rest
 
                             # Cleanup
                             docker rm -f wiremock
-                            "${WORKSPACE}/stop_flask.sh"
+                            ./stop_flask.sh
                         '''
                       }
                       stash name:'rest-res', includes:'result-rest.xml'
