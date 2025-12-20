@@ -33,7 +33,7 @@ pipeline {
                                 cd "${WORKSPACE}"
                                 ls -la
                                 export PYTHONPATH="${WORKSPACE}"
-                                ./venv/bin/pytest --junitxml=result-unit.xml test/unit
+                                python3 -m pytest --junitxml=result-unit.xml test/unit
                             '''
                             stash name:'unit-res', includes:'result-unit.xml'
                        }
@@ -53,8 +53,9 @@ pipeline {
                             ./stop_wiremock.sh || true
                             ./stop_flask.sh || true
 
-                            # Start services using scripts
-                            ./start_flask.sh
+                            # Start Flask
+                            export FLASK_APP="${WORKSPACE}/app/api.py"
+                            python3 -m flask run --port 5000 > flask.log 2>&1 &
 
                             # Start WireMock with Docker
                             docker rm -f wiremock 2>/dev/null || true
@@ -69,7 +70,7 @@ pipeline {
 
                             # Run tests
                             export PYTHONPATH="${WORKSPACE}"
-                            ./venv/bin/pytest --junitxml=result-rest.xml test/rest
+                            python3 -m pytest --junitxml=result-rest.xml test/rest
 
                             # Cleanup
                             docker rm -f wiremock

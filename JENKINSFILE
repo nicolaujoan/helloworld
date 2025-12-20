@@ -28,7 +28,7 @@ pipeline {
                                     sh '''
                                         cd "${WORKSPACE}"
                                         export PYTHONPATH="${WORKSPACE}"
-                                        ./venv/bin/pytest --junitxml=result-unit.xml test/unit
+                                        python3 -m pytest --junitxml=result-unit.xml test/unit
                                     '''
                                 }
                             }
@@ -45,8 +45,10 @@ pipeline {
                                 ./stop_wiremock.sh || true
                                 ./stop_flask.sh || true
 
-                                # Start services using scripts
-                                ./start_flask.sh
+                                # Start Flask
+                                export FLASK_APP="${WORKSPACE}/app/api.py"
+                                python3 -m flask run --port 5000 > flask.log 2>&1 &
+
                                 ./start_wiremock.sh
 
                                 # Wait for services to be ready
@@ -54,7 +56,7 @@ pipeline {
 
                                 # Run tests
                                 export PYTHONPATH="${WORKSPACE}"
-                                ./venv/bin/pytest --junitxml=result-rest.xml test/rest
+                                python3 -m pytest --junitxml=result-rest.xml test/rest
 
                                 # Cleanup
                                 ./stop_wiremock.sh
