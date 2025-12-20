@@ -7,7 +7,7 @@ pipeline {
         stage('Get Code') {
             steps {
                 // Obtener código del repo
-                git 'https://github.com/anieto-unir/helloworld.git'
+                git 'https://github.com/nicolaujoan/helloworld.git'
                 sh 'echo "Workspace: ${WORKSPACE}"'
                 sh 'ls -la'
                 stash name:'code', includes:'**'

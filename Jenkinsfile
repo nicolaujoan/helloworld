@@ -5,7 +5,7 @@ pipeline {
         stage('Get Code') {
             steps {
                 // Traer todo el código fuente del repositorio
-                git 'https://github.com/anieto-unir/helloworld.git'
+                git 'https://github.com/nicolaujoan/helloworld.git'
 
                 // Verificar que el código se ha descargado
                 sh 'ls -la'
