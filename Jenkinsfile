@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent principal
 
     stages {
         stage('Get Code') {
