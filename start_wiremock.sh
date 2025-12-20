@@ -7,7 +7,7 @@ docker rm -f wiremock 2>/dev/null
 docker run -d \
   --name wiremock \
   -p 9090:8080 \
-  -v $(pwd)/test/wiremock:/home/wiremock \
+  -v "$(pwd)/test/wiremock":/home/wiremock \
   wiremock/wiremock:latest
 
 if [ $? -eq 0 ]; then
