@@ -4,3 +4,10 @@ __pycache__
 flask.pid
 flask.log
 venv/
+
+# agents stuff
+agent1/
+agent2/
+agent.jar
+run_agent1.sh
+run_agent2.sh

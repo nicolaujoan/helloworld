@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+     stages {
+        stage('Get Code') {
+            steps {
+                // Obtener código del repo
+                git 'https://github.com/anieto-unir/helloworld.git'
+                sh 'ls -la'
+                sh 'echo "Workspace: ${WORKSPACE}"'
+            }
+        }
+
+        stage('Build') {
+           steps {
+              echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
+           }
+        }
+
+        stage('Tests')
+        {
+            parallel
+            {
+
+                stage('Unit') {
+                            steps {
+                                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                                    sh '''
+                                        export PYTHONPATH=${WORKSPACE}
+                                        ${WORKSPACE}/venv/bin/pytest --junitxml=result-unit.xml test/unit
+                                    '''
+                                }
+                            }
+                }
+
+
+                stage('Rest') {
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            sh '''
+                                # Stop any existing services
+                                ${WORKSPACE}/stop_wiremock.sh || true
+                                ${WORKSPACE}/stop_flask.sh || true
+
+                                # Start services using scripts
+                                ${WORKSPACE}/start_flask.sh
+                                ${WORKSPACE}/start_wiremock.sh
+
+                                # Wait for services to be ready
+                                sleep 10
+
+                                # Run tests
+                                export PYTHONPATH=${WORKSPACE}
+                                ${WORKSPACE}/venv/bin/pytest --junitxml=result-rest.xml test/rest
+
+                                # Cleanup
+                                ${WORKSPACE}/stop_wiremock.sh
+                                ${WORKSPACE}/stop_flask.sh
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+        stage ('Results') {
+            steps {
+                junit 'result*.xml'
+            }
+        }
+     }
+}

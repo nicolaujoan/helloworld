@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+
+    options { skipDefaultCheckout() }
+
+     stages {
+        stage('Get Code') {
+            steps {
+                // Obtener código del repo
+                git 'https://github.com/anieto-unir/helloworld.git'
+                sh 'echo "Workspace: ${WORKSPACE}"'
+                sh 'ls -la'
+                stash name:'code', includes:'**'
+            }
+        }
+
+        stage('Build') {
+           steps {
+              echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
+           }
+        }
+
+        stage('Tests')
+        {
+            parallel
+            {
+                stage('Unit') {
+                    agent {label 'agent1'}
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            unstash name:'code'
+                            sh '''
+                                ls -la
+                                export PYTHONPATH=${WORKSPACE}
+                                ./venv/bin/pytest --junitxml=result-unit.xml test/unit
+                            '''
+                            stash name:'unit-res', includes:'result-unit.xml'
+                       }
+                    }
+                }
+
+
+                stage('Rest') {
+                    agent {label 'agent2'}
+                    steps {
+                      catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                        unstash name:'code'
+                        sh '''
+                            # Stop any existing services
+                            ./stop_wiremock.sh || true
+                            ./stop_flask.sh || true
+
+                            # Start services using scripts
+                            ./start_flask.sh
+
+                            # Start WireMock with Docker
+                            docker rm -f wiremock 2>/dev/null || true
+                            docker run -d \
+                              --name wiremock \
+                              -p 9090:8080 \
+                              -v ${WORKSPACE}/test/wiremock:/home/wiremock \
+                              wiremock/wiremock:latest
+
+                            # Wait for services to be ready
+                            sleep 10
+
+                            # Run tests
+                            export PYTHONPATH=${WORKSPACE}
+                            ./venv/bin/pytest --junitxml=result-rest.xml test/rest
+
+                            # Cleanup
+                            docker rm -f wiremock
+                            ./stop_flask.sh
+                        '''
+                      }
+                      stash name:'rest-res', includes:'result-rest.xml'
+                    }
+                }
+
+            }
+        }
+
+        stage('Results') {
+            steps {
+                unstash name:'unit-res'
+                unstash name:'rest-res'
+                junit 'result*.xml'
+            }
+        }
+
+    }
+}
