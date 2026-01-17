@@ -70,9 +70,9 @@ pd: recordar a ejecutar los agents antes de lanzar pipelines ;)
 #### Reto 1 - Pipeline CI (60%)
 
 **Instalación de herramientas:**
-- [ ] Instalar módulos Python: pytest, flask, flake8, bandit, coverage
-- [ ] Instalar plugins Jenkins: JUnit, GitHub, cobertura, warnings-ng, performance
-- [ ] Instalar JMeter (v5.5 o superior)
+- [x] Instalar módulos Python: pytest, flask, flake8, bandit, coverage
+- [x] Instalar plugins Jenkins: JUnit, GitHub, cobertura, warnings-ng, performance
+- [x] Instalar JMeter (v5.5 o superior)
 
 **Etapas del Pipeline:**
 - [ ] Eliminar etapa "Build"
