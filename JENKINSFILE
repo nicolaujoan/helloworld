@@ -114,8 +114,8 @@ pipeline {
                         # Wait for Flask to be ready
                         sleep 5
 
-                        # Run JMeter tests
-                        /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -e -o jmeter-report/
+                        # Run JMeter tests (-j specifies log file location)
+                        /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
 
                         # Cleanup
                         ./stop_flask.sh
