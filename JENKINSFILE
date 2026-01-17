@@ -21,6 +21,8 @@ pipeline {
                                 export PYTHONPATH="${WORKSPACE}"
                                 python3 -m coverage run --branch --source=app -m pytest --junitxml=result-unit.xml test/unit
                                 python3 -m coverage xml -o coverage.xml
+                                # Fix paths in coverage.xml: remove 'app/' prefix so plugin finds files in 'app' directory
+                                sed -i 's|filename="app/|filename="|g' coverage.xml
                                 # Debug: show coverage.xml content to verify paths
                                 head -50 coverage.xml
                                 python3 -m coverage report
