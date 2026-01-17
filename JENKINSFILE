@@ -26,7 +26,7 @@ pipeline {
                             junit 'result-unit.xml'
                             publishCoverage adapters: [coberturaAdapter('coverage.xml')],
                                 sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
-                                sourceDirectories: [[path: 'app']],
+                                sourceDirectories: [[path: '.']],
                                 globalThresholds: [[thresholdTarget: 'Line', unhealthyThreshold: 85.0, unstableThreshold: 95.0],
                                                    [thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 90.0]]
                         }
