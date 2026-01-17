@@ -1,89 +1,145 @@
 pipeline {
-    agent any
+    agent none
 
     options { skipDefaultCheckout() }
 
-     stages {
+    stages {
         stage('Get Code') {
+            agent any
             steps {
                 // Obtener código del repo
                 git 'https://github.com/nicolaujoan/helloworld.git'
+                sh 'whoami'
+                sh 'hostname'
                 sh 'echo "Workspace: ${WORKSPACE}"'
                 sh 'ls -la'
                 stash name:'code', includes:'**'
+                cleanWs()
             }
         }
 
-        stage('Build') {
-           steps {
-              echo 'Eyyy, esto es Python. No hay que compilar nada!!!'
-           }
-        }
-
-        stage('Tests')
-        {
-            parallel
-            {
-                stage('Unit') {
+        stage('Tests') {
+            parallel {
+                stage('Unit + Coverage') {
                     agent {label 'agent1'}
                     steps {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                             unstash name:'code'
                             sh '''
+                                whoami
+                                hostname
+                                echo "Workspace: ${WORKSPACE}"
+
                                 cd "${WORKSPACE}"
                                 export PYTHONPATH="${WORKSPACE}"
-                                python3 -m pytest --junitxml=result-unit.xml test/unit
+
+                                # Ejecutar Unit con Coverage
+                                python3 -m coverage run --branch --source=app -m pytest --junitxml=result-unit.xml test/unit
+                                python3 -m coverage xml -o coverage.xml
+                                python3 -m coverage report
                             '''
-                            stash name:'unit-res', includes:'result-unit.xml'
-                       }
+                            junit 'result-unit.xml'
+                            publishCoverage adapters: [coberturaAdapter('coverage.xml')],
+                                sourceFileResolver: sourceFiles('NEVER_STORE'),
+                                globalThresholds: [[thresholdTarget: 'Line', unhealthyThreshold: 85.0, unstableThreshold: 95.0],
+                                                   [thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 90.0]]
+                        }
+                    }
+                    post {
+                        always {
+                            cleanWs()
+                        }
                     }
                 }
 
-
-                stage('Rest') {
+                stage('Rest + Performance') {
                     agent {label 'agent2'}
                     steps {
-                      catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                        unstash name:'code'
-                        sh '''
-                            cd "${WORKSPACE}"
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            unstash name:'code'
+                            sh '''
+                                whoami
+                                hostname
+                                echo "Workspace: ${WORKSPACE}"
 
-                            # Stop any existing services
-                            ./stop_wiremock.sh || true
-                            ./stop_flask.sh || true
+                                cd "${WORKSPACE}"
 
-                            # Start Flask
-                            export FLASK_APP="${WORKSPACE}/app/api.py"
-                            python3 -m flask run --port 5000 > flask.log 2>&1 &
+                                # Stop any existing services
+                                ./stop_wiremock.sh || true
+                                ./stop_flask.sh || true
 
-                            ./start_wiremock.sh
+                                # Start Flask
+                                export FLASK_APP="${WORKSPACE}/app/api.py"
+                                python3 -m flask run --port 5000 > flask.log 2>&1 &
 
-                            # Wait for services to be ready
-                            sleep 10
+                                ./start_wiremock.sh
 
-                            # Run tests
-                            export PYTHONPATH="${WORKSPACE}"
-                            python3 -m pytest --junitxml=result-rest.xml test/rest
+                                # Wait for services to be ready
+                                sleep 10
 
-                            # Cleanup
-                            ./stop_wiremock.sh
-                            ./stop_flask.sh
-                        '''
-                      }
-                      stash name:'rest-res', includes:'result-rest.xml'
+                                # Run REST tests
+                                export PYTHONPATH="${WORKSPACE}"
+                                python3 -m pytest --junitxml=result-rest.xml test/rest
+                            '''
+                            junit 'result-rest.xml'
+
+                            sh '''
+                                cd "${WORKSPACE}"
+
+                                # Run JMeter tests (Flask is already running)
+                                /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
+
+                                # Cleanup
+                                ./stop_wiremock.sh
+                                ./stop_flask.sh
+                            '''
+                            perfReport sourceDataFiles: 'results.jtl'
+                        }
+                    }
+                    post {
+                        always {
+                            cleanWs()
+                        }
                     }
                 }
 
+                stage('Static + Security') {
+                    agent any
+                    steps {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            unstash name:'code'
+                            sh '''
+                                whoami
+                                hostname
+                                echo "Workspace: ${WORKSPACE}"
+
+                                cd "${WORKSPACE}"
+                                python3 -m flake8 --exit-zero --format=pylint app > flake8.out || true
+                            '''
+                            recordIssues tools: [flake8(name: 'Flake8', pattern: 'flake8.out')],
+                                qualityGates: [
+                                    [threshold: 8, type: 'TOTAL', unstable: true],
+                                    [threshold: 10, type: 'TOTAL', failure: true]
+                                ]
+
+                            sh '''
+                                cd "${WORKSPACE}"
+                                python3 -m bandit -r app -f custom -o bandit.out --msg-template "{abspath}:{line}: [{test_id}] {msg}" || true
+                            '''
+                            recordIssues tools: [pyLint(name: 'Bandit', pattern: 'bandit.out')],
+                                qualityGates: [
+                                    [threshold: 2, type: 'TOTAL', unstable: true],
+                                    [threshold: 4, type: 'TOTAL', failure: true]
+                                ]
+                        }
+                    }
+                    post {
+                        always {
+                            cleanWs()
+                        }
+                    }
+                }
             }
         }
-
-        stage('Results') {
-            steps {
-                unstash name:'unit-res'
-                unstash name:'rest-res'
-                junit 'result*.xml'
-            }
-        }
-
     }
 }

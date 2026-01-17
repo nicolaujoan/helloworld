@@ -75,39 +75,39 @@ pd: recordar a ejecutar los agents antes de lanzar pipelines ;)
 - [x] Instalar JMeter (v5.5 o superior)
 
 **Etapas del Pipeline:**
-- [ ] Eliminar etapa "Build"
-- [ ] Eliminar etapa "Results" (cada test publicará sus propios resultados)
-- [ ] Mantener etapa "Get Code" (automática desde SCM)
-- [ ] Mantener etapa "Unit" (sin baremo, siempre verde, ejecutar solo 1 vez)
-- [ ] Mantener etapa "Rest" (sin baremo, siempre verde)
+- [x] Eliminar etapa "Build"
+- [x] Eliminar etapa "Results" (cada test publicará sus propios resultados)
+- [x] Mantener etapa "Get Code" (automática desde SCM)
+- [x] Mantener etapa "Unit" (sin baremo, siempre verde, ejecutar solo 1 vez)
+- [x] Mantener etapa "Rest" (sin baremo, siempre verde)
 
 **Nueva etapa "Static" - Análisis de código estático (flake8):**
-- [ ] Ejecutar flake8 sobre el código
-- [ ] Si ≥8 hallazgos → unstable (amarillo/naranja)
-- [ ] Si ≥10 hallazgos → unhealthy (rojo)
-- [ ] Pipeline continúa independientemente del resultado
-- [ ] Publicar resultados con plugin warnings-ng
+- [x] Ejecutar flake8 sobre el código
+- [x] Si ≥8 hallazgos → unstable (amarillo/naranja)
+- [x] Si ≥10 hallazgos → unhealthy (rojo)
+- [x] Pipeline continúa independientemente del resultado
+- [x] Publicar resultados con plugin warnings-ng
 
 **Nueva etapa "Security Test" - Análisis de seguridad (bandit):**
-- [ ] Ejecutar bandit sobre el código
-- [ ] Si ≥2 hallazgos → unstable (amarillo/naranja)
-- [ ] Si ≥4 hallazgos → unhealthy (rojo)
-- [ ] Pipeline continúa independientemente del resultado
-- [ ] Publicar resultados con plugin warnings-ng
+- [x] Ejecutar bandit sobre el código
+- [x] Si ≥2 hallazgos → unstable (amarillo/naranja)
+- [x] Si ≥4 hallazgos → unhealthy (rojo)
+- [x] Pipeline continúa independientemente del resultado
+- [x] Publicar resultados con plugin warnings-ng
 
 **Nueva etapa "Coverage" - Cobertura de código (coverage):**
-- [ ] Ejecutar coverage sobre pruebas unitarias
-- [ ] Cobertura por líneas: <85% rojo, 85-95% unstable, >95% verde
-- [ ] Cobertura por ramas: <80% rojo, 80-90% unstable, >90% verde
-- [ ] Pipeline continúa independientemente del resultado
-- [ ] Publicar resultados con plugin cobertura
-- [ ] Recordar: pruebas unitarias solo se ejecutan 1 vez en todo el pipeline
+- [x] Ejecutar coverage sobre pruebas unitarias
+- [x] Cobertura por líneas: <85% rojo, 85-95% unstable, >95% verde
+- [x] Cobertura por ramas: <80% rojo, 80-90% unstable, >90% verde
+- [x] Pipeline continúa independientemente del resultado
+- [x] Publicar resultados con plugin cobertura
+- [x] Recordar: pruebas unitarias solo se ejecutan 1 vez en todo el pipeline
 
 **Nueva etapa "Performance" - Pruebas de carga (JMeter):**
-- [ ] Crear test-plan JMeter: 5 hilos, 40 llamadas a /add, 40 llamadas a /subtract
-- [ ] Levantar Flask antes de ejecutar JMeter
-- [ ] Ejecutar test-plan desde línea de comandos
-- [ ] Publicar resultados con plugin performance
+- [x] Crear test-plan JMeter: 5 hilos, 40 llamadas a /add, 40 llamadas a /subtract
+- [x] Levantar Flask antes de ejecutar JMeter
+- [x] Ejecutar test-plan desde línea de comandos
+- [x] Publicar resultados con plugin performance
 - [ ] Incluir en entregables: valor "línea 90" para microservicio suma + captura gráfica
 
 #### Reto 2 - Distribución de agentes (25%)
