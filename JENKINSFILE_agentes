@@ -86,6 +86,9 @@ pipeline {
                             sh '''
                                 cd "${WORKSPACE}"
 
+                                # Clean previous JMeter results
+                                rm -rf jmeter-report/ results.jtl
+
                                 # Run JMeter tests (Flask is already running)
                                 /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
 

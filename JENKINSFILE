@@ -114,6 +114,9 @@ pipeline {
                         # Wait for Flask to be ready
                         sleep 5
 
+                        # Clean previous JMeter results
+                        rm -rf jmeter-report/ results.jtl
+
                         # Run JMeter tests (-j specifies log file location)
                         /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
 

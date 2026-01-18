@@ -112,13 +112,13 @@ pd: recordar a ejecutar los agents antes de lanzar pipelines ;)
 
 #### Reto 2 - Distribución de agentes (25%)
 
-- [ ] Elegir y justificar separación de agentes para el pipeline
-- [ ] Paralelizar todas las pruebas posibles
-- [ ] Si alguna prueba no se puede paralelizar, explicar por qué y proponer solución
-- [ ] Actualizar JENKINSFILE_agentes con asignación de etapas a agentes
-- [ ] Implementar stash/unstash para compartir archivos entre nodos
-- [ ] Limpiar workspace al finalizar cada etapa
-- [ ] Incluir comandos: whoami, hostname, echo ${WORKSPACE} en cada etapa
+- [x] Elegir y justificar separación de agentes para el pipeline (ver justificacion_distribucion_agentes.md)
+- [x] Paralelizar todas las pruebas posibles
+- [x] Si alguna prueba no se puede paralelizar, explicar por qué y proponer solución (ver justificacion_distribucion_agentes.md)
+- [x] Actualizar JENKINSFILE_agentes con asignación de etapas a agentes
+- [x] Implementar stash/unstash para compartir archivos entre nodos
+- [x] Limpiar workspace al finalizar cada etapa
+- [x] Incluir comandos: whoami, hostname, echo ${WORKSPACE} en cada etapa
 - [ ] Configurar executors entre 2-4, ejecutar pipeline y obtener log
 - [ ] Configurar executors en 1, ejecutar pipeline, explicar comportamiento y adjuntar log
 
