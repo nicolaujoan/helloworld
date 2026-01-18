@@ -124,11 +124,11 @@ pd: recordar a ejecutar los agents antes de lanzar pipelines ;)
 
 #### Reto 3 - Mejora de cobertura (15%)
 
-- [ ] Crear rama "feature_fix_coverage" desde master
-- [ ] Modificar tests en test/unit para lograr 100% cobertura (líneas y ramas)
-- [ ] NO modificar código en carpeta "app"
-- [ ] NO usar "pragma: no cover"
-- [ ] Explicar cuál era el problema de cobertura
-- [ ] Explicar cuál ha sido la solución implementada
+- [x] Crear rama "feature_fix_coverage" desde master
+- [x] Modificar tests en test/unit para lograr 100% cobertura (líneas y ramas)
+- [x] NO modificar código en carpeta "app"
+- [x] NO usar "pragma: no cover"
+- [x] Explicar cuál era el problema de cobertura (ver justificacion_mejora_cobertura.md)
+- [x] Explicar cuál ha sido la solución implementada (ver justificacion_mejora_cobertura.md)
 - [ ] Adjuntar log mostrando cobertura 100%
 - [ ] Adjuntar gráficas de evolución de cobertura (plugin cobertura)
