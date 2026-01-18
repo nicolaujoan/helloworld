@@ -1,0 +1,339 @@
+Lanzada por el usuario unknown or anonymous
+Obtained JENKINSFILE from git https://github.com/nicolaujoan/helloworld
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins 
+ in /var/lib/jenkins/workspace/cp 1.2 cobertura
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/cp 1.2 cobertura/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/nicolaujoan/helloworld # timeout=10
+Fetching upstream changes from https://github.com/nicolaujoan/helloworld
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/nicolaujoan/helloworld +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/feature_fix_coverage^{commit} # timeout=10
+Checking out Revision 5d1b55c88d673cba32f89679e39fb197c20b8f62 (refs/remotes/origin/feature_fix_coverage)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5d1b55c88d673cba32f89679e39fb197c20b8f62 # timeout=10
+Commit message: "fix: usar rama feature_fix_coverage en JENKINSFILE"
+ > git rev-list --no-walk f06288eeb18e1d60741e3cf48a73dbe16ad5b273 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Get Code)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/cp 1.2 cobertura/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/nicolaujoan/helloworld.git # timeout=10
+Fetching upstream changes from https://github.com/nicolaujoan/helloworld.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/nicolaujoan/helloworld.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/feature_fix_coverage^{commit} # timeout=10
+Checking out Revision 5d1b55c88d673cba32f89679e39fb197c20b8f62 (refs/remotes/origin/feature_fix_coverage)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5d1b55c88d673cba32f89679e39fb197c20b8f62 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b feature_fix_coverage 5d1b55c88d673cba32f89679e39fb197c20b8f62 # timeout=10
+Commit message: "fix: usar rama feature_fix_coverage en JENKINSFILE"
+[Pipeline] sh
++ ls -la
+total 224
+drwxr-xr-x 8 jenkins jenkins  4096 ene 18 11:50 .
+drwxr-xr-x 8 jenkins jenkins  4096 ene 18 11:37 ..
+drwxr-xr-x 3 jenkins jenkins  4096 ene 18 11:37 app
+-rw-r--r-- 1 jenkins jenkins     0 ene 18 11:44 bandit.out
+-rw-r--r-- 1 jenkins jenkins 53248 ene 18 11:50 .coverage
+-rw-r--r-- 1 jenkins jenkins  3508 ene 18 11:44 coverage.xml
+drwxr-xr-x 2 jenkins jenkins  4096 ene 18 11:37 docs
+-rw-r--r-- 1 jenkins jenkins   500 ene 18 11:44 flake8.out
+-rw-r--r-- 1 jenkins jenkins  6425 ene 18 11:44 flask.log
+-rw-r--r-- 1 jenkins jenkins   242 ene 18 11:44 flask_perf.log
+drwxr-xr-x 8 jenkins jenkins  4096 ene 18 11:50 .git
+-rw-r--r-- 1 jenkins jenkins   132 ene 18 11:37 .gitignore
+-rw-r--r-- 1 jenkins jenkins   603 ene 18 11:37 Jenkinsfile
+-rw-r--r-- 1 jenkins jenkins  5531 ene 18 11:50 JENKINSFILE
+-rw-r--r-- 1 jenkins jenkins  6125 ene 18 11:37 JENKINSFILE_agentes
+-rw-r--r-- 1 jenkins jenkins  1590 ene 18 11:50 jmeter.log
+drwxr-xr-x 4 jenkins jenkins  4096 ene 18 11:44 jmeter-report
+-rw-r--r-- 1 jenkins jenkins 22053 ene 18 11:37 justificacion_distribucion_agentes.md
+-rw-r--r-- 1 jenkins jenkins  6163 ene 18 11:50 justificacion_mejora_cobertura.md
+-rw-r--r-- 1 jenkins jenkins    21 ene 18 11:37 kill_port.sh
+drwxr-xr-x 3 jenkins jenkins  4096 ene 18 11:37 .pytest_cache
+-rw-r--r-- 1 jenkins jenkins   169 ene 18 11:37 pytest.ini
+-rw-r--r-- 1 jenkins jenkins  6700 ene 18 11:50 README.md
+-rw-r--r-- 1 jenkins jenkins   412 ene 18 11:44 result-rest.xml
+-rw-r--r-- 1 jenkins jenkins  9926 ene 18 11:44 results.jtl
+-rw-r--r-- 1 jenkins jenkins  1423 ene 18 11:44 result-unit.xml
+-rwxr-xr-x 1 jenkins jenkins   176 ene 18 11:37 start_flask.sh
+-rw-r--r-- 1 jenkins jenkins   412 ene 18 11:37 start_jmeter.sh
+-rwxr-xr-x 1 jenkins jenkins   439 ene 18 11:37 start_wiremock.sh
+-rwxr-xr-x 1 jenkins jenkins   171 ene 18 11:37 stop_flask.sh
+-rw-r--r-- 1 jenkins jenkins   146 ene 18 11:37 stop_jmeter.sh
+-rwxr-xr-x 1 jenkins jenkins   152 ene 18 11:37 stop_wiremock.sh
+drwxr-xr-x 6 jenkins jenkins  4096 ene 18 11:37 test
+[Pipeline] sh
++ echo Workspace: /var/lib/jenkins/workspace/cp 1.2 cobertura
+Workspace: /var/lib/jenkins/workspace/cp 1.2 cobertura
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tests)
+[Pipeline] parallel
+[Pipeline] { (Branch: Unit)
+[Pipeline] { (Branch: Rest)
+[Pipeline] { (Branch: Static)
+[Pipeline] { (Branch: Security)
+[Pipeline] stage
+[Pipeline] { (Unit)
+[Pipeline] stage
+[Pipeline] { (Rest)
+[Pipeline] stage
+[Pipeline] { (Static)
+[Pipeline] stage
+[Pipeline] { (Security)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ cd /var/lib/jenkins/workspace/cp 1.2 cobertura
++ export PYTHONPATH=/var/lib/jenkins/workspace/cp 1.2 cobertura
++ python3 -m coverage run --branch --source=app -m pytest --junitxml=result-unit.xml test/unit
++ cd /var/lib/jenkins/workspace/cp 1.2 cobertura
++ ./stop_wiremock.sh
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
++ export FLASK_APP=/var/lib/jenkins/workspace/cp 1.2 cobertura/app/api.py
++ ./start_wiremock.sh
++ python3 -m flask run --port 5000
+5b279c9bffcdda4e3d0693f52d246c229084cc9de8b2cb210e49fde25c39d851
+WireMock started on port 9090
+Container ID: 5b279c9bffcd
++ sleep 10
++ cd /var/lib/jenkins/workspace/cp 1.2 cobertura
++ python3 -m flake8 --exit-zero --format=pylint app
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Flake8] Searching for all files in '/var/lib/jenkins/workspace/cp 1.2 cobertura' that match the pattern 'flake8.out'
+[Flake8] Traversing of symbolic links: enabled
+[Flake8] -> found 1 file
+[Flake8] Successfully parsed file /var/lib/jenkins/workspace/cp 1.2 cobertura/flake8.out
+[Flake8] -> found 9 issues (skipped 0 duplicates)
+[Flake8] Successfully processed file 'flake8.out'
++ cd /var/lib/jenkins/workspace/cp 1.2 cobertura
++ python3 -m bandit -r app -f custom -o bandit.out --msg-template {abspath}:{line}: [{test_id}] {msg}
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.12.3
+[custom]	INFO	Result written to file: bandit.out
+[Flake8] Post processing issues on 'Master' with source code encoding 'UTF-8'
+[Flake8] Creating SCM blamer to obtain author and commit information for affected files
+[Flake8] -> No blamer installed yet. You need to install the 'git-forensics' plugin to enable blaming for Git.
+[Flake8] Resolving file names for all issues in workspace '/var/lib/jenkins/workspace/cp 1.2 cobertura'
+[Flake8] -> resolved paths in source directory (2 found, 0 not found)
+[Flake8] Resolving module names from module definitions (build.xml, pom.xml, or Manifest.mf files)
+[Flake8] -> resolved module names for 9 issues
+[Flake8] Resolving package names (or namespaces) by parsing the affected files
+[Flake8] -> resolved package names of 2 affected files
+[Flake8] No filter has been set, publishing all 9 issues
+[Flake8] Creating fingerprints for all affected code blocks to track issues over different builds
+[Flake8] -> created fingerprints for 9 issues (skipped 0 issues)
+[Flake8] Copying affected files to Jenkins' build folder '/var/lib/jenkins/jobs/cp 1.2 cobertura/builds/7/files-with-issues'
+[Flake8] -> 2 copied, 0 not in workspace, 0 not-found, 0 with I/O error
+[Flake8] Skipping cleaning of source code files in old builds
+[Flake8] Repository miner is not configured, skipping repository mining
+[Flake8] Reference build recorder is not configured
+[Flake8] No valid reference build found
+[Flake8] All reported issues will be considered outstanding
+[Flake8] Evaluating quality gates
+[Flake8] -> Some quality gates have been missed: overall result is UNSTABLE
+[Flake8] -> Details for each quality gate:
+[Flake8]    - [Total (any severity)]: ≪Inestable≫ - (Actual value: 9, Quality gate: 8,00)
+[Flake8]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 9, Quality gate: 10,00)
+[Flake8] Health report is disabled - skipping
+[Flake8] Created analysis result for 9 issues (found 0 new issues, fixed 0 issues)
+[Flake8] Attaching ResultAction with ID 'flake8' to build 'cp 1.2 cobertura #7'.
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Bandit] Searching for all files in '/var/lib/jenkins/workspace/cp 1.2 cobertura' that match the pattern 'bandit.out'
+[Bandit] Traversing of symbolic links: enabled
+[Bandit] -> found 1 file
+[Bandit] Skipping file 'bandit.out' because it's empty
+[Bandit] Skipping post processing
+[Bandit] No filter has been set, publishing all 0 issues
+[Bandit] Repository miner is not configured, skipping repository mining
+[Bandit] Reference build recorder is not configured
+[Bandit] No valid reference build found
+[Bandit] All reported issues will be considered outstanding
+[Bandit] Evaluating quality gates
+[Bandit] -> All quality gates have been passed
+[Bandit] -> Details for each quality gate:
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 2,00)
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 4,00)
+[Bandit] Health report is disabled - skipping
+[Bandit] Created analysis result for 0 issues (found 0 new issues, fixed 0 issues)
+[Bandit] Attaching ResultAction with ID 'pylint' to build 'cp 1.2 cobertura #7'.
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Checks API] No suitable checks publisher found.
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /var/lib/jenkins/workspace/cp 1.2 cobertura
+configfile: pytest.ini
+collected 20 items
+
+test/unit/api_test.py .........                                          [ 45%]
+test/unit/calc_test.py .........                                         [ 90%]
+test/unit/util_test.py ..                                                [100%]
+
+- generated xml file: /var/lib/jenkins/workspace/cp 1.2 cobertura/result-unit.xml -
+============================== 20 passed in 0.36s ==============================
++ python3 -m coverage xml -o coverage.xml
+Wrote XML report to coverage.xml
++ python3 -m coverage report
+Name              Stmts   Miss Branch BrPart  Cover
+---------------------------------------------------
+app/__init__.py       0      0      0      0   100%
+app/api.py           24      0      6      0   100%
+app/calc.py          24      0      4      0   100%
+app/util.py           7      0      2      0   100%
+---------------------------------------------------
+TOTAL                55      0     12      0   100%
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] publishCoverage
+Publishing Coverage report....
+A total of 1 reports were found
+Report coverage diff: 0.0%. Add to CoverageResult.
+Group coverage diff: 0.0%. Add to CoverageResult.
+Package coverage diff: 0.0%. Add to CoverageResult.
+File coverage diff: 25.0%. Add to CoverageResult.
+Class coverage diff: 25.0%. Add to CoverageResult.
+Line coverage diff: 45.454544%. Add to CoverageResult.
+Conditional coverage diff: 58.333332%. Add to CoverageResult.
+[Coverage] Computing coverage delta report
+[Coverage] Reference build recorder is not configured
+[Coverage] -> No reference build defined, falling back to previous build
+[Coverage] -> Found reference result 'io.jenkins.plugins.coverage.CoverageAction@6a34fd1a'
+[Coverage] Verify uniqueness of file paths...
+[Coverage] Obtaining action of reference build
+[Coverage] Reference build recorder is not configured
+[Coverage] -> No reference build defined, falling back to previous build: '#6'
+[Coverage] -> Found reference result in build '#6'
+[Coverage] Calculating the code delta...
+[Coverage] -> No delta calculator installed yet. You need to install the 'git-forensics' plugin to enable it for Git.
+[Coverage] Calculating coverage deltas...
+[Coverage] Executing source code painting...
+[Coverage] Finished coverage processing - adding the action to the build...
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
++ export PYTHONPATH=/var/lib/jenkins/workspace/cp 1.2 cobertura
++ python3 -m pytest --junitxml=result-rest.xml test/rest
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /var/lib/jenkins/workspace/cp 1.2 cobertura
+configfile: pytest.ini
+collected 2 items
+
+test/rest/api_test.py ..                                                 [100%]
+
+- generated xml file: /var/lib/jenkins/workspace/cp 1.2 cobertura/result-rest.xml -
+============================== 2 passed in 0.06s ===============================
++ ./stop_wiremock.sh
+wiremock
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Performance)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] sh
++ cd /var/lib/jenkins/workspace/cp 1.2 cobertura
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
++ export FLASK_APP=/var/lib/jenkins/workspace/cp 1.2 cobertura/app/api.py
++ sleep 5
++ python3 -m flask run --port 5000
++ rm -rf jmeter-report/ results.jtl
++ /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using test/jmeter/flask.jmx
+Starting standalone test @ 2026 Jan 18 11:50:56 CET (1768733456948)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary =     80 in 00:00:01 =   91.7/s Avg:     2 Min:     0 Max:    16 Err:     0 (0.00%)
+Tidying up ...    @ 2026 Jan 18 11:50:57 CET (1768733457866)
+... end of run
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
+[Pipeline] perfReport
+Creating parser with percentiles:'0,50,90,95,100,' filterRegex:null
+Performance: Recording JMeterCsv reports 'results.jtl'
+Performance: JMeterCsv copying reports to master, files '[/var/lib/jenkins/workspace/cp 1.2 cobertura/results.jtl]'
+Performance: JMeterCsv parsing local reports '[/var/lib/jenkins/jobs/cp 1.2 cobertura/builds/7/performance-reports/JMeterCSV/results.jtl]'
+Performance: Parsing report file '/var/lib/jenkins/jobs/cp 1.2 cobertura/builds/7/performance-reports/JMeterCSV/results.jtl' with filterRegex 'null'.
+Performance: No threshold configured for making the test unstable
+Performance: No threshold configured for making the test failure
+Performance: File results.jtl reported 0.0% of errors [SUCCESS]. Build status is: UNSTABLE
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: UNSTABLE

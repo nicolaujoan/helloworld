@@ -1,0 +1,336 @@
+Lanzada por el usuario unknown or anonymous
+Obtained JENKINSFILE_agentes from git https://github.com/nicolaujoan/helloworld
+[Pipeline] Start of Pipeline
+[Pipeline] stage
+[Pipeline] { (Get Code)
+[Pipeline] node
+Running on agent2
+ in /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+[Pipeline] {
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/nicolaujoan/helloworld.git
+ > git init /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes # timeout=10
+Fetching upstream changes from https://github.com/nicolaujoan/helloworld.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/nicolaujoan/helloworld.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 638f84c7db178103dd3bc6da100582d1287f15e8 (refs/remotes/origin/master)
+Commit message: "preparacion reto 2 distribucion de agentes"
+First time build. Skipping changelog.
+[Pipeline] sh
++ whoami
+joan
+[Pipeline] sh
++ hostname
+joan-OMEN-Gaming-Laptop-16-am0xxx
+[Pipeline] sh
+ > git config remote.origin.url https://github.com/nicolaujoan/helloworld.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 638f84c7db178103dd3bc6da100582d1287f15e8 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master 638f84c7db178103dd3bc6da100582d1287f15e8 # timeout=10
++ echo Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+[Pipeline] sh
++ ls -la
+total 116
+drwxrwxr-x  6 joan joan  4096 ene 17 12:31 .
+drwxrwxr-x 10 joan joan  4096 ene 17 12:31 ..
+drwxrwxr-x  2 joan joan  4096 ene 17 12:31 app
+drwxrwxr-x  2 joan joan  4096 ene 17 12:31 docs
+drwxrwxr-x  8 joan joan  4096 ene 17 12:31 .git
+-rw-rw-r--  1 joan joan   132 ene 17 12:31 .gitignore
+-rw-rw-r--  1 joan joan   603 ene 17 12:31 Jenkinsfile
+-rw-rw-r--  1 joan joan  5379 ene 17 12:31 JENKINSFILE
+-rw-rw-r--  1 joan joan  5994 ene 17 12:31 JENKINSFILE_agentes
+-rw-rw-r--  1 joan joan  1590 ene 17 12:31 jmeter.log
+-rw-rw-r--  1 joan joan 22053 ene 17 12:31 justificacion_distribucion_agentes.md
+-rw-rw-r--  1 joan joan    21 ene 17 12:31 kill_port.sh
+-rw-rw-r--  1 joan joan   169 ene 17 12:31 pytest.ini
+-rw-rw-r--  1 joan joan  6532 ene 17 12:31 README.md
+-rwxrwxr-x  1 joan joan   176 ene 17 12:31 start_flask.sh
+-rw-rw-r--  1 joan joan   412 ene 17 12:31 start_jmeter.sh
+-rwxrwxr-x  1 joan joan   439 ene 17 12:31 start_wiremock.sh
+-rwxrwxr-x  1 joan joan   171 ene 17 12:31 stop_flask.sh
+-rw-rw-r--  1 joan joan   146 ene 17 12:31 stop_jmeter.sh
+-rwxrwxr-x  1 joan joan   152 ene 17 12:31 stop_wiremock.sh
+drwxrwxr-x  6 joan joan  4096 ene 17 12:31 test
+[Pipeline] stash
+Stashed 27 file(s)
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tests)
+[Pipeline] parallel
+[Pipeline] { (Branch: Unit + Coverage)
+[Pipeline] { (Branch: Rest + Performance)
+[Pipeline] { (Branch: Static + Security)
+[Pipeline] stage
+[Pipeline] { (Unit + Coverage)
+[Pipeline] stage
+[Pipeline] { (Rest + Performance)
+[Pipeline] stage
+[Pipeline] { (Static + Security)
+[Pipeline] node
+Running on agent1
+ in /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
+[Pipeline] node
+Running on agent2
+ in /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+[Pipeline] node
+Running on Jenkins 
+ in /var/lib/jenkins/workspace/cp 1.2 agentes
+[Pipeline] {
+[Pipeline] {
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] unstash
+[Pipeline] unstash
+[Pipeline] unstash
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ whoami
+jenkins
++ hostname
+joan-OMEN-Gaming-Laptop-16-am0xxx
++ echo Workspace: /var/lib/jenkins/workspace/cp 1.2 agentes
+Workspace: /var/lib/jenkins/workspace/cp 1.2 agentes
++ cd /var/lib/jenkins/workspace/cp 1.2 agentes
++ python3 -m flake8 --exit-zero --format=pylint app
++ whoami
+joan
++ hostname
+joan-OMEN-Gaming-Laptop-16-am0xxx
++ echo Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
++ ./stop_wiremock.sh
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
++ export FLASK_APP=/home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes/app/api.py
++ ./start_wiremock.sh
++ python3 -m flask run --port 5000
+8f407010ee0cdce4289a2f978685fd8d6ca85941293209199b96a4a0b8e66e53
+WireMock started on port 9090
+Container ID: 8f407010ee0c
++ sleep 10
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Flake8] Searching for all files in '/var/lib/jenkins/workspace/cp 1.2 agentes' that match the pattern 'flake8.out'
+[Flake8] Traversing of symbolic links: enabled
+[Flake8] -> found 1 file
+[Flake8] Successfully parsed file /var/lib/jenkins/workspace/cp 1.2 agentes/flake8.out
+[Flake8] -> found 9 issues (skipped 0 duplicates)
+[Flake8] Successfully processed file 'flake8.out'
+[Flake8] Post processing issues on 'Master' with source code encoding 'UTF-8'
+[Flake8] Creating SCM blamer to obtain author and commit information for affected files
+[Flake8] -> No blamer installed yet. You need to install the 'git-forensics' plugin to enable blaming for Git.
+[Flake8] Resolving file names for all issues in workspace '/var/lib/jenkins/workspace/cp 1.2 agentes'
+[Flake8] -> resolved paths in source directory (2 found, 0 not found)
+[Flake8] Resolving module names from module definitions (build.xml, pom.xml, or Manifest.mf files)
+[Flake8] -> resolved module names for 9 issues
+[Flake8] Resolving package names (or namespaces) by parsing the affected files
+[Flake8] -> resolved package names of 2 affected files
+[Flake8] No filter has been set, publishing all 9 issues
+[Flake8] Creating fingerprints for all affected code blocks to track issues over different builds
+[Flake8] -> created fingerprints for 9 issues (skipped 0 issues)
+[Flake8] Copying affected files to Jenkins' build folder '/var/lib/jenkins/jobs/cp 1.2 agentes/builds/1/files-with-issues'
+[Flake8] -> 2 copied, 0 not in workspace, 0 not-found, 0 with I/O error
+[Flake8] Skipping cleaning of source code files in old builds
+[Flake8] Repository miner is not configured, skipping repository mining
+[Flake8] Reference build recorder is not configured
+[Flake8] No valid reference build found
+[Flake8] All reported issues will be considered outstanding
+[Flake8] Evaluating quality gates
+[Flake8] -> Some quality gates have been missed: overall result is UNSTABLE
+[Flake8] -> Details for each quality gate:
+[Flake8]    - [Total (any severity)]: ≪Inestable≫ - (Actual value: 9, Quality gate: 8,00)
+[Flake8]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 9, Quality gate: 10,00)
+[Flake8] Health report is disabled - skipping
+[Flake8] Created analysis result for 9 issues (found 0 new issues, fixed 0 issues)
+[Flake8] Attaching ResultAction with ID 'flake8' to build 'cp 1.2 agentes #1'.
+[Checks API] No suitable checks publisher found.
+[Pipeline] sh
++ whoami
+joan
++ hostname
+joan-OMEN-Gaming-Laptop-16-am0xxx
++ echo Workspace: /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
+Workspace: /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
++ cd /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
++ export PYTHONPATH=/home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
++ python3 -m coverage run --branch --source=app -m pytest --junitxml=result-unit.xml test/unit
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes
+configfile: pytest.ini
+collected 10 items
+
+test/unit/calc_test.py .+ cd /var/lib/jenkins/workspace/cp 1.2 agentes
++ python3 -m bandit -r app -f custom -o bandit.out --msg-template {abspath}:{line}: [{test_id}] {msg}
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.12.3
+[custom]	INFO	Result written to file: bandit.out
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Bandit] Searching for all files in '/var/lib/jenkins/workspace/cp 1.2 agentes' that match the pattern 'bandit.out'
+[Bandit] Traversing of symbolic links: enabled
+[Bandit] -> found 1 file
+[Bandit] Skipping file 'bandit.out' because it's empty
+[Bandit] Skipping post processing
+[Bandit] No filter has been set, publishing all 0 issues
+[Bandit] Repository miner is not configured, skipping repository mining
+[Bandit] Reference build recorder is not configured
+[Bandit] No valid reference build found
+[Bandit] All reported issues will be considered outstanding
+[Bandit] Evaluating quality gates
+[Bandit] -> All quality gates have been passed
+[Bandit] -> Details for each quality gate:
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 2,00)
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 4,00)
+[Bandit] Health report is disabled - skipping
+[Bandit] Created analysis result for 0 issues (found 0 new issues, fixed 0 issues)
+[Bandit] Attaching ResultAction with ID 'pylint' to build 'cp 1.2 agentes #1'.
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+Post stage
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+.......                                          [ 80%]
+test/unit/util_test.py ..                                                [100%]
+
+- generated xml file: /home/joan/unir/helloworld/agent1/workspace/cp 1.2 agentes/result-unit.xml -
+============================== 10 passed in 0.04s ==============================
++ python3 -m coverage xml -o coverage.xml
+Wrote XML report to coverage.xml
++ python3 -m coverage report
+Name              Stmts   Miss Branch BrPart  Cover
+---------------------------------------------------
+app/__init__.py       0      0      0      0   100%
+app/api.py           24     24      6      0     0%
+app/calc.py          24      1      4      1    93%
+app/util.py           7      0      2      0   100%
+---------------------------------------------------
+TOTAL                55     25     12      1    52%
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] publishCoverage
+Publishing Coverage report....
+A total of 1 reports were found
+[Coverage] Computing coverage delta report
+[Coverage] Reference build recorder is not configured
+[Coverage] -> No reference build defined, falling back to previous build
+[Coverage] -> Found no reference result in reference build
+Code coverage enforcement failed: Line coverage in Report level 'cobertura: coverage.xml' is lower than 95,00 stable threshold
+Code coverage enforcement failed: Conditional coverage in Report level 'cobertura: coverage.xml' is lower than 90,00 stable threshold
+[Coverage] Verify uniqueness of file paths...
+[Coverage] Obtaining action of reference build
+[Coverage] Reference build recorder is not configured
+[Coverage] -> Found no reference result in reference build
+[Coverage] Executing source code painting...
+[Coverage] Finished coverage processing - adding the action to the build...
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+Post stage
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
++ export PYTHONPATH=/home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
++ python3 -m pytest --junitxml=result-rest.xml test/rest
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
+configfile: pytest.ini
+collected 2 items
+
+test/rest/api_test.py ..                                                 [100%]
+
+- generated xml file: /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes/result-rest.xml -
+============================== 2 passed in 0.06s ===============================
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] sh
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes
++ /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using test/jmeter/flask.jmx
+Starting standalone test @ 2026 Jan 17 12:31:59 CET (1768649519002)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary =     80 in 00:00:01 =   93.5/s Avg:     2 Min:     1 Max:    16 Err:     0 (0.00%)
+Tidying up ...    @ 2026 Jan 17 12:31:59 CET (1768649519910)
+... end of run
++ ./stop_wiremock.sh
+wiremock
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
+[Pipeline] perfReport
+Creating parser with percentiles:'0,50,90,95,100,' filterRegex:null
+Performance: Recording JMeterCsv reports 'results.jtl'
+Performance: JMeterCsv copying reports to master, files '[/home/joan/unir/helloworld/agent2/workspace/cp 1.2 agentes/results.jtl]'
+Performance: JMeterCsv parsing local reports '[/var/lib/jenkins/jobs/cp 1.2 agentes/builds/1/performance-reports/JMeterCSV/results.jtl]'
+Performance: Parsing report file '/var/lib/jenkins/jobs/cp 1.2 agentes/builds/1/performance-reports/JMeterCSV/results.jtl' with filterRegex 'null'.
+Performance: No threshold configured for making the test unstable
+Performance: No threshold configured for making the test failure
+Performance: File results.jtl reported 0.0% of errors [SUCCESS]. Build status is: UNSTABLE
+[Pipeline] }
+[Pipeline] // catchError
+Post stage
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] End of Pipeline
+Finished: UNSTABLE

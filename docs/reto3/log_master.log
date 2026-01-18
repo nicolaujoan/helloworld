@@ -1,0 +1,344 @@
+Lanzada por el usuario unknown or anonymous
+Obtained JENKINSFILE from git https://github.com/nicolaujoan/helloworld
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on agent2
+ in /home/joan/unir/helloworld/agent2/workspace/cp 1.2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Fetching changes from the remote Git repository
+ > git rev-parse --resolve-git-dir /home/joan/unir/helloworld/agent2/workspace/cp 1.2/.git # timeout=10
+ > git config remote.origin.url https://github.com/nicolaujoan/helloworld # timeout=10
+Fetching upstream changes from https://github.com/nicolaujoan/helloworld
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/nicolaujoan/helloworld +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 10859c1743fd11704833c46bf2adf8a25a0cabdb (refs/remotes/origin/master)
+Commit message: "borramos reporte antiguo para que no falle la posterior ejecucion"
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 10859c1743fd11704833c46bf2adf8a25a0cabdb # timeout=10
+ > git rev-list --no-walk 10859c1743fd11704833c46bf2adf8a25a0cabdb # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Get Code)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Fetching changes from the remote Git repository
+Checking out Revision 10859c1743fd11704833c46bf2adf8a25a0cabdb (refs/remotes/origin/master)
+Commit message: "borramos reporte antiguo para que no falle la posterior ejecucion"
+[Pipeline] sh
+ > git rev-parse --resolve-git-dir /home/joan/unir/helloworld/agent2/workspace/cp 1.2/.git # timeout=10
+ > git config remote.origin.url https://github.com/nicolaujoan/helloworld.git # timeout=10
+Fetching upstream changes from https://github.com/nicolaujoan/helloworld.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/nicolaujoan/helloworld.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 10859c1743fd11704833c46bf2adf8a25a0cabdb # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 10859c1743fd11704833c46bf2adf8a25a0cabdb # timeout=10
++ ls -la
+total 224
+drwxrwxr-x 9 joan joan  4096 ene 18 12:04 .
+drwxrwxr-x 9 joan joan  4096 ene 17 12:32 ..
+drwxrwxr-x 3 joan joan  4096 ene 17 11:30 app
+-rw-rw-r-- 1 joan joan     0 ene 18 11:23 bandit.out
+-rw-r--r-- 1 joan joan 53248 ene 18 11:23 .coverage
+drwxrwxr-x 2 joan joan  4096 ene 17 11:46 coverage
+-rw-rw-r-- 1 joan joan   134 ene 17 12:12 coverage-sources.zip
+-rw-rw-r-- 1 joan joan  3515 ene 18 11:23 coverage.xml
+drwxrwxr-x 2 joan joan  4096 ene 18 11:22 docs
+-rw-rw-r-- 1 joan joan   500 ene 18 11:23 flake8.out
+-rw-rw-r-- 1 joan joan  6432 ene 18 11:23 flask.log
+-rw-rw-r-- 1 joan joan   249 ene 18 11:23 flask_perf.log
+drwxrwxr-x 8 joan joan  4096 ene 18 12:04 .git
+-rw-rw-r-- 1 joan joan   132 ene 17 11:30 .gitignore
+-rw-rw-r-- 1 joan joan   603 ene 17 11:30 Jenkinsfile
+-rw-rw-r-- 1 joan joan  5494 ene 18 11:22 JENKINSFILE
+-rw-rw-r-- 1 joan joan  6125 ene 18 11:22 JENKINSFILE_agentes
+-rw-rw-r-- 1 joan joan  1590 ene 18 12:04 jmeter.log
+drwxrwxr-x 4 joan joan  4096 ene 18 11:23 jmeter-report
+-rw-rw-r-- 1 joan joan 22053 ene 17 11:30 justificacion_distribucion_agentes.md
+-rw-rw-r-- 1 joan joan    21 ene 17 11:30 kill_port.sh
+drwxrwxr-x 3 joan joan  4096 ene 17 11:30 .pytest_cache
+-rw-rw-r-- 1 joan joan   169 ene 17 11:30 pytest.ini
+-rw-rw-r-- 1 joan joan  6620 ene 18 11:22 README.md
+-rw-rw-r-- 1 joan joan   412 ene 18 11:23 result-rest.xml
+-rw-rw-r-- 1 joan joan  9926 ene 18 11:23 results.jtl
+-rw-rw-r-- 1 joan joan  1423 ene 18 11:23 result-unit.xml
+-rwxrwxr-x 1 joan joan   176 ene 17 11:30 start_flask.sh
+-rw-rw-r-- 1 joan joan   412 ene 17 11:30 start_jmeter.sh
+-rwxrwxr-x 1 joan joan   439 ene 17 11:30 start_wiremock.sh
+-rwxrwxr-x 1 joan joan   171 ene 17 11:30 stop_flask.sh
+-rw-rw-r-- 1 joan joan   146 ene 17 11:30 stop_jmeter.sh
+-rwxrwxr-x 1 joan joan   152 ene 17 11:30 stop_wiremock.sh
+drwxrwxr-x 6 joan joan  4096 ene 17 11:30 test
+[Pipeline] sh
++ echo Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2
+Workspace: /home/joan/unir/helloworld/agent2/workspace/cp 1.2
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Tests)
+[Pipeline] parallel
+[Pipeline] { (Branch: Unit)
+[Pipeline] { (Branch: Rest)
+[Pipeline] { (Branch: Static)
+[Pipeline] { (Branch: Security)
+[Pipeline] stage
+[Pipeline] { (Unit)
+[Pipeline] stage
+[Pipeline] { (Rest)
+[Pipeline] stage
+[Pipeline] { (Static)
+[Pipeline] stage
+[Pipeline] { (Security)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ export PYTHONPATH=/home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ python3 -m coverage run --branch --source=app -m pytest --junitxml=result-unit.xml test/unit
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ ./stop_wiremock.sh
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
++ export FLASK_APP=/home/joan/unir/helloworld/agent2/workspace/cp 1.2/app/api.py
++ ./start_wiremock.sh
++ python3 -m flask run --port 5000
+a74335ac45004ee2c6c3d6b5e73609b9f600279eee638510dbd0c5697ed66440
+WireMock started on port 9090
+Container ID: a74335ac4500
++ sleep 10
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ python3 -m flake8 --exit-zero --format=pylint app
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Flake8] Searching for all files in '/home/joan/unir/helloworld/agent2/workspace/cp 1.2' that match the pattern 'flake8.out'
+[Flake8] Traversing of symbolic links: enabled
+[Flake8] -> found 1 file
+[Flake8] Successfully parsed file /home/joan/unir/helloworld/agent2/workspace/cp 1.2/flake8.out
+[Flake8] -> found 9 issues (skipped 0 duplicates)
+[Flake8] Successfully processed file 'flake8.out'
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ python3 -m bandit -r app -f custom -o bandit.out --msg-template {abspath}:{line}: [{test_id}] {msg}
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.12.3
+[custom]	INFO	Result written to file: bandit.out
+[Pipeline] recordIssues
+WARNING: Unknown parameter(s) found for class type 'io.jenkins.plugins.analysis.core.util.WarningsQualityGate': failure
+[Bandit] Searching for all files in '/home/joan/unir/helloworld/agent2/workspace/cp 1.2' that match the pattern 'bandit.out'
+[Bandit] Traversing of symbolic links: enabled
+[Bandit] -> found 1 file
+[Bandit] Skipping file 'bandit.out' because it's empty
+[Bandit] Skipping post processing
+[Bandit] No filter has been set, publishing all 0 issues
+[Bandit] Repository miner is not configured, skipping repository mining
+[Bandit] Reference build recorder is not configured
+[Bandit] No valid reference build found
+[Bandit] All reported issues will be considered outstanding
+[Bandit] Evaluating quality gates
+[Bandit] -> All quality gates have been passed
+[Bandit] -> Details for each quality gate:
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 2,00)
+[Bandit]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 0, Quality gate: 4,00)
+[Bandit] Health report is disabled - skipping
+[Bandit] Created analysis result for 0 issues (found 0 new issues, fixed 0 issues)
+[Bandit] Attaching ResultAction with ID 'pylint' to build 'cp 1.2 #19'.
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Flake8] Post processing issues on 'agent2' with source code encoding 'UTF-8'
+[Flake8] Creating SCM blamer to obtain author and commit information for affected files
+[Flake8] -> No blamer installed yet. You need to install the 'git-forensics' plugin to enable blaming for Git.
+[Flake8] Resolving file names for all issues in workspace '/home/joan/unir/helloworld/agent2/workspace/cp 1.2'
+[Flake8] -> resolved paths in source directory (2 found, 0 not found)
+[Flake8] Resolving module names from module definitions (build.xml, pom.xml, or Manifest.mf files)
+[Flake8] -> resolved module names for 9 issues
+[Flake8] Resolving package names (or namespaces) by parsing the affected files
+[Flake8] -> resolved package names of 2 affected files
+[Flake8] No filter has been set, publishing all 9 issues
+[Flake8] Creating fingerprints for all affected code blocks to track issues over different builds
+[Flake8] -> created fingerprints for 9 issues (skipped 0 issues)
+[Flake8] Copying affected files to Jenkins' build folder '/var/lib/jenkins/jobs/cp 1.2/builds/19/files-with-issues'
+[Flake8] -> 2 copied, 0 not in workspace, 0 not-found, 0 with I/O error
+[Flake8] Skipping cleaning of source code files in old builds
+[Flake8] Repository miner is not configured, skipping repository mining
+[Flake8] Reference build recorder is not configured
+[Flake8] No valid reference build found
+[Flake8] All reported issues will be considered outstanding
+[Flake8] Evaluating quality gates
+[Flake8] -> Some quality gates have been missed: overall result is UNSTABLE
+[Flake8] -> Details for each quality gate:
+[Flake8]    - [Total (any severity)]: ≪Inestable≫ - (Actual value: 9, Quality gate: 8,00)
+[Flake8]    - [Total (any severity)]: ≪Correcto≫ - (Actual value: 9, Quality gate: 10,00)
+[Flake8] Health report is disabled - skipping
+[Flake8] Created analysis result for 9 issues (found 0 new issues, fixed 0 issues)
+[Flake8] Attaching ResultAction with ID 'flake8' to build 'cp 1.2 #19'.
+[Pipeline] // stage
+[Pipeline] }
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /home/joan/unir/helloworld/agent2/workspace/cp 1.2
+configfile: pytest.ini
+collected 10 items
+
+test/unit/calc_test.py ........                                          [ 80%]
+test/unit/util_test.py ..                                                [100%]
+
+- generated xml file: /home/joan/unir/helloworld/agent2/workspace/cp 1.2/result-unit.xml -
+============================== 10 passed in 0.04s ==============================
++ python3 -m coverage xml -o coverage.xml
+Wrote XML report to coverage.xml
++ python3 -m coverage report
+Name              Stmts   Miss Branch BrPart  Cover
+---------------------------------------------------
+app/__init__.py       0      0      0      0   100%
+app/api.py           24     24      6      0     0%
+app/calc.py          24      1      4      1    93%
+app/util.py           7      0      2      0   100%
+---------------------------------------------------
+TOTAL                55     25     12      1    52%
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] publishCoverage
+Publishing Coverage report....
+A total of 1 reports were found
+Report coverage diff: 0.0%. Add to CoverageResult.
+Group coverage diff: 0.0%. Add to CoverageResult.
+Package coverage diff: 0.0%. Add to CoverageResult.
+File coverage diff: 0.0%. Add to CoverageResult.
+Class coverage diff: 0.0%. Add to CoverageResult.
+Line coverage diff: 0.0%. Add to CoverageResult.
+Conditional coverage diff: 0.0%. Add to CoverageResult.
+[Coverage] Computing coverage delta report
+[Coverage] Reference build recorder is not configured
+[Coverage] -> No reference build defined, falling back to previous build
+[Coverage] -> Found reference result 'io.jenkins.plugins.coverage.CoverageAction@3e0dd734'
+Code coverage enforcement failed: Line coverage in Report level 'cobertura: coverage.xml' is lower than 95,00 stable threshold
+Code coverage enforcement failed: Conditional coverage in Report level 'cobertura: coverage.xml' is lower than 90,00 stable threshold
+[Coverage] Verify uniqueness of file paths...
+[Coverage] Obtaining action of reference build
+[Coverage] Reference build recorder is not configured
+[Coverage] -> No reference build defined, falling back to previous build: '#18'
+[Coverage] -> Found reference result in build '#18'
+[Coverage] Calculating the code delta...
+[Coverage] -> No delta calculator installed yet. You need to install the 'git-forensics' plugin to enable it for Git.
+[Coverage] Calculating coverage deltas...
+[Coverage] Executing source code painting...
+[Coverage] Finished coverage processing - adding the action to the build...
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
++ export PYTHONPATH=/home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ python3 -m pytest --junitxml=result-rest.xml test/rest
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /home/joan/unir/helloworld/agent2/workspace/cp 1.2
+configfile: pytest.ini
+collected 2 items
+
+test/rest/api_test.py ..                                                 [100%]
+
+- generated xml file: /home/joan/unir/helloworld/agent2/workspace/cp 1.2/result-rest.xml -
+============================== 2 passed in 0.06s ===============================
++ ./stop_wiremock.sh
+wiremock
+WireMock server stopped
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
+[Pipeline] junit
+Grabando resultados de tests
+[Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Performance)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] sh
++ cd /home/joan/unir/helloworld/agent2/workspace/cp 1.2
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
++ export FLASK_APP=/home/joan/unir/helloworld/agent2/workspace/cp 1.2/app/api.py
++ sleep 5
++ python3 -m flask run --port 5000
++ rm -rf jmeter-report/ results.jtl
++ /opt/jmeter/bin/jmeter -n -t test/jmeter/flask.jmx -l results.jtl -j jmeter.log -e -o jmeter-report/
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using test/jmeter/flask.jmx
+Starting standalone test @ 2026 Jan 18 12:04:30 CET (1768734270720)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      1 in 00:00:00 =   11.9/s Avg:    16 Min:    16 Max:    16 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+summary +     79 in 00:00:01 =  100.1/s Avg:     2 Min:     0 Max:     5 Err:     0 (0.00%) Active: 0 Started: 5 Finished: 5
+summary =     80 in 00:00:01 =   91.6/s Avg:     2 Min:     0 Max:    16 Err:     0 (0.00%)
+Tidying up ...    @ 2026 Jan 18 12:04:31 CET (1768734271645)
+... end of run
++ ./stop_flask.sh
+No flask.pid file found. Flask may not be running.
+[Pipeline] perfReport
+Creating parser with percentiles:'0,50,90,95,100,' filterRegex:null
+Performance: Recording JMeterCsv reports 'results.jtl'
+Performance: JMeterCsv copying reports to master, files '[/home/joan/unir/helloworld/agent2/workspace/cp 1.2/results.jtl]'
+Performance: JMeterCsv parsing local reports '[/var/lib/jenkins/jobs/cp 1.2/builds/19/performance-reports/JMeterCSV/results.jtl]'
+Performance: Parsing report file '/var/lib/jenkins/jobs/cp 1.2/builds/19/performance-reports/JMeterCSV/results.jtl' with filterRegex 'null'.
+Performance: No threshold configured for making the test unstable
+Performance: No threshold configured for making the test failure
+Performance: File results.jtl reported 0.0% of errors [SUCCESS]. Build status is: UNSTABLE
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: UNSTABLE
