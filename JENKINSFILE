@@ -5,7 +5,7 @@ pipeline {
         stage('Get Code') {
             steps {
                 // Obtener código del repo
-                git 'https://github.com/nicolaujoan/helloworld.git'
+                git branch: 'feature_fix_coverage', url: 'https://github.com/nicolaujoan/helloworld.git'
                 sh 'ls -la'
                 sh 'echo "Workspace: ${WORKSPACE}"'
             }
