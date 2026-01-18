@@ -1,7 +1,7 @@
 import pytest
 import unittest
 
-from app.calc import Calculator
+from app.calc import Calculator, InvalidPermissions
 
 
 @pytest.mark.unit
@@ -66,6 +66,23 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.substract(0, 0))
         self.assertEqual(0, self.calc.substract(0, 0))
         self.assertRaises(TypeError, self.calc.substract, "0", 0)
-        
-if __name__ == "__main__":  # pragma: no cover
+
+    def test_divide_method_fails_with_division_by_zero(self):
+        self.assertRaises(TypeError, self.calc.divide, 2, 0)
+        self.assertRaises(TypeError, self.calc.divide, -5, 0)
+        self.assertRaises(TypeError, self.calc.divide, 0, 0)
+
+    def test_invalid_permissions_exception(self):
+        # Test that InvalidPermissions can be raised and caught
+        with self.assertRaises(InvalidPermissions):
+            raise InvalidPermissions("No permission")
+
+        # Test exception message
+        try:
+            raise InvalidPermissions("Test message")
+        except InvalidPermissions as e:
+            self.assertEqual(str(e), "Test message")
+
+
+if __name__ == "__main__":
     unittest.main()

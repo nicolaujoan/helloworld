@@ -35,5 +35,5 @@ class TestApi(unittest.TestCase):
             response.read().decode(), "8", "ERROR SQRT"
         )
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__": 
     unittest.main()
