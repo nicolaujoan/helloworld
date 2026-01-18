@@ -34,7 +34,7 @@ class Calculator:
             raise TypeError("Parameters must be numbers")
 
 
-# if __name__ == "__main__":
-#     calc = Calculator()
-#     result = calc.add(2, 2)
-#     print(result)
+if __name__ == "__main__":  # pragma: no cover
+    calc = Calculator()
+    result = calc.add(2, 2)
+    print(result)
